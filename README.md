@@ -1,19 +1,23 @@
-Project Overview
+# 📌 Project Overview
 EliteGadget is an electronic gadgets e-commerce platform designed to provide a seamless shopping experience. This project was built using Next.js (frontend) and Node.js with Express and Mongoose (backend) following a modular architecture.
 
-Implementation Details
-Frontend (Next.js)
-State Management: Redux Toolkit
-Styling: Tailwind CSS
-Routing: Next.js App Router
-Authentication: JWT & Firebase Social Login
-UI Components: Shadcn & Material-UI
-Backend (Node.js + Express + Mongoose)
-Database: MongoDB
-ORM/ODM: Mongoose & Prisma
-Authentication: JWT
-Payment Integration: SSLCommerz
-Search Feature: Meilisearch
+## 🛠 Implementation Details
+
+### 🌐 Frontend (Next.js)
+- **State Management:** Redux Toolkit
+- **Styling:** Tailwind CSS
+- **Routing:** Next.js App Router
+- **Authentication:** JWT & Firebase Social Login
+- **UI Components:** Shadcn & Material-UI
+
+### 🔧 Backend (Node.js + Express + Mongoose)
+- **Database:** MongoDB
+- **ORM/ODM:** Mongoose & Prisma
+- **Authentication:** JWT
+- **Payment Integration:** SSLCommerz
+- **Search Feature:** Meilisearch
+
+---
 # Weekend Case Study: Building the Backend for Electronic Gadgets Shop
 
 **Date:** February 3-4, 2025 
