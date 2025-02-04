@@ -1,6 +1,6 @@
 # Weekend Case Study: Building the Backend for Electronic Gadgets Shop
 
-**Date:** October 21-22, 2023  
+**Date:** February 3-4, 2025 
 **Goal:** Set up the backend for the Electronic Gadgets Shop project using Node.js, Express, and MongoDB.  
 
 ---
@@ -38,5 +38,11 @@
 - 📌 Improved my understanding of TypeScript and Mongoose.
 
 ---
+## 🎯 Next Week
+- Implement order management (Cart, Checkout, Payment Gateway).
+- Add user profile and order history features.
+- Optimize API performance and database queries.
+- Deploy the backend to a production server.
+
 
 > This case study highlights my problem-solving skills and backend development expertise. 🚀
