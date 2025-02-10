@@ -7,9 +7,14 @@ import routes from "./routes";
 const app = express();
 
 // Middleware
-app.use(cors());
-app.use(express.json());
+const corsOptions = {
+  origin: "http://localhost:3000", // Replace with your frontend URL
+  credentials: true, // Allow credentials (cookies, headers, etc.)
+};
 
+app.use(cors(corsOptions));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true })); //
 // Use combined routes
 app.use(routes);
 

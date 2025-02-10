@@ -1,6 +1,8 @@
 import express from "express";
-import { authMiddleware, roleMiddleware } from "../middleware/auth";
-import { createProduct, getProducts } from "../services/productServices";
+
+import { createProductHandler } from "../controllers/productController";
+import { authMiddleware } from "../middleware/auth";
+import { getProducts } from "../services/productServices";
 
 const router = express.Router();
 
@@ -18,23 +20,11 @@ router.get("/products", authMiddleware, async (req, res) => {
   }
 });
 
-// Admin-only route: Add a new product (requires admin role)
+// ✅ Admin-only route: Add a new product (requires admin role & image upload)
 router.post(
   "/products",
-  authMiddleware,
-  roleMiddleware("admin"),
-  async (req, res) => {
-    try {
-      const product = await createProduct(req.body);
-      res.status(201).json(product);
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        res.status(500).json({ message: error.message });
-      } else {
-        res.status(500).json({ message: "An unknown error occurred" });
-      }
-    }
-  }
+  // upload.array("images", 2), // Handle multiple image uploads
+  createProductHandler
 );
 
 export default router;
