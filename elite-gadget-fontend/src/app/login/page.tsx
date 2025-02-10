@@ -31,7 +31,7 @@ export default function LoginPage() {
     try {
       const response = await loginUser(values);
       console.log(response);
-      storeUserInfo({ accessToken: response?.accessToken });
+      storeUserInfo({ accessToken: response?.token });
     } catch (error) {
       console.log("Error:", error);
     }

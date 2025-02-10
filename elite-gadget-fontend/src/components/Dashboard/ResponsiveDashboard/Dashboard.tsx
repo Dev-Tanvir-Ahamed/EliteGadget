@@ -1,11 +1,13 @@
 "use client";
 import { getUserInfo } from "@/services/auth.services";
+import { UserRole } from "@/types";
+import { getMenuItems } from "@/utils/sidebarItems";
 import { Layout, Menu, theme } from "antd";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { adminMenu, customerMenu } from "../Sidebar/SidebarItem";
 import DashboardSkeleton from "./DashboardSkelton";
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Content, Sider } = Layout;
 
 const ResponsiveDashboard = ({ children }: { children: React.ReactNode }) => {
   const {
@@ -13,38 +15,45 @@ const ResponsiveDashboard = ({ children }: { children: React.ReactNode }) => {
   } = theme.useToken();
 
   const [mounted, setMounted] = useState(false);
-  const userInfo = getUserInfo() as any;
-  const roleToLowerCase = userInfo?.role?.toLowerCase();
-  const menuItems = roleToLowerCase == "admin" ? adminMenu : customerMenu;
+  const userInfo = getUserInfo() as { role?: UserRole };
+  const menuItems = getMenuItems(userInfo?.role || "CUSTOMER"); // Default to 'customer'
 
   useEffect(() => {
-    setTimeout(() => setMounted(true), 500); // Delay to ensure smooth rendering
+    setTimeout(() => setMounted(true), 500); // Delay for smooth rendering
   }, []);
 
   if (!mounted) {
-    return <DashboardSkeleton />; // Use Skeleton component
+    return <DashboardSkeleton />;
   }
 
   return (
     <Layout>
-      <Sider
-        breakpoint="lg"
-        collapsedWidth="0"
-        onBreakpoint={(broken) => console.log(broken)}
-        onCollapse={(collapsed, type) => console.log(collapsed, type)}
-        className=""
-      >
+      <Sider breakpoint="lg" collapsedWidth="0" className="">
         <div className="demo-logo-vertical" />
-        <Menu
-          theme="dark"
-          mode="inline"
-          defaultSelectedKeys={["1"]}
-          items={menuItems.map((item) => ({
-            key: item.key,
-            icon: item.icon,
-            label: <a href={item.path}>{item.label}</a>,
-          }))}
-        />
+        <Menu theme="dark" mode="inline" defaultSelectedKeys={["dashboard"]}>
+          {menuItems.map((item: any) =>
+            item.child ? (
+              <Menu.SubMenu
+                key={item.key}
+                icon={React.createElement(item.icon)}
+                title={item.label}
+              >
+                {item.child.map((subItem: any) => (
+                  <Menu.Item
+                    key={subItem.key}
+                    icon={React.createElement(subItem.icon)}
+                  >
+                    <Link href={subItem.path}>{subItem.label}</Link>
+                  </Menu.Item>
+                ))}
+              </Menu.SubMenu>
+            ) : (
+              <Menu.Item key={item.key} icon={React.createElement(item.icon)}>
+                <Link href={item.path}>{item.label}</Link>
+              </Menu.Item>
+            )
+          )}
+        </Menu>
       </Sider>
       <Layout>
         <Content style={{ margin: "24px 16px 0" }}>

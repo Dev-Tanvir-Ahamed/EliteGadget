@@ -1,19 +1,21 @@
 import { Controller, useFormContext } from "react-hook-form";
-import { Input } from "../ui/input";
-type TInputProps = {
+import { Textarea } from "../ui/textarea";
+
+type TTextareaProps = {
   placeholder?: string;
-  type?: string;
   name: string;
   required?: boolean;
   className?: string;
+  row?: number;
 };
-const InputForm = ({
+
+const TextareaForm = ({
   name,
-  type = "text",
   placeholder,
   required,
   className,
-}: TInputProps) => {
+  row,
+}: TTextareaProps) => {
   const { control } = useFormContext();
   return (
     <div>
@@ -22,12 +24,12 @@ const InputForm = ({
         control={control}
         name={name}
         render={({ field }) => (
-          <Input
+          <Textarea
             {...field}
-            type={type}
             required={required}
             placeholder={placeholder}
             className={className}
+            rows={row}
           />
         )}
       />
@@ -35,4 +37,4 @@ const InputForm = ({
   );
 };
 
-export default InputForm;
+export default TextareaForm;
